@@ -25,7 +25,7 @@ The API is organized around REST. All requests should be made over SSL. All requ
 
     RETN-API-KEY must be passed in the request header for all API Calls.
     
-## Generate RETN ERC20 Address [/generateErcAddressAsMerchant/]
+## Generate RETN ERC20 Address For your Consumers [/generateErcAddressAsMerchant/]
 
 ### POST [POST]
 
@@ -77,6 +77,60 @@ Note : This API Checks if the user already exists with the network and returns t
             "status": "false"
             "message": "Invalid API key"
         }
+
+## Generate RETN ERC20 Address For your Merchants [/generateErcAddressAsPlatform/]
+
+### POST [POST]
+
+This is meant for the platforms. You can use this method to generate RETN ERC20 Address of your merchants. You will have to pass the email ID of the user to get the ERC20 Address
+
+*Parameters to post*
+
++ email (string)                : Email ID for whom the ERC20 address has to be generated
+
+Note : This API Checks if the user already exists with the network and returns their details. If not, the user will be signedup in the network and their credentials will be mailed to them and returns their newly created ERC20 address.
+
++ Request  (application/json)
+
+    + Headers
+    
+            RETN-API-KEY: YOUR_API_KEY
+
+    + Body 
+
+            {
+                "email": "rajesh@retainlyhq.com"
+            }
+            
+
++ Response 200 (application/json)
+
+        {
+         "status": true,
+         "erc20addr": "0x96ec31220e85f05f48bb48ba81ea7dc924f14873",
+         "rest_key": "01d1d8178c0c3602952850c92677cdec"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "status": "false"
+            "message": "Email Missing"
+        }
+
++ Response 200 (application/json)
+
+        {
+             "status": "false",
+            "message": "Invalid Email Format"
+        }
+        
++ Response 403 (application/json)
+
+        {
+            "status": "false"
+            "message": "Invalid API key"
+        }        
         
 ## Redeem From Merchant [/redeemFromMerchant/]
 
