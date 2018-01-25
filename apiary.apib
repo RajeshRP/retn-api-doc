@@ -3,13 +3,14 @@ HOST: https://staging.retainly.co/app/eth
 
 # RETN
 
-Integrate your app with RETN cashback Network. The most popular crypto loyalty cashback system that everyone loves.
-This documentation is intended for the merchants that are already having cashback system but willing to use RETN network to use crypto cashback with RETN coin.
+Activate RETN Crypto Cashback inside your application. The most popular crypto loyalty cashback system that everyone loves.
+This documentation is intended for businesses that already have a loyalty system and eager to add additional crypto cashback redemption option for their customers.
+
 The merchants must signup with RETN and get their API key to consume the below endpoints.
 
 ##Requirements for apps using the RETN API
 
-Retainly API supports non-rich internet SaaS apps that users access with a web browser. Mobile extensions to these SaaS apps are also supported.
+RETN API supports apps that users access with a web browser. Mobile extensions to these apps are also supported.
 
 If you plan to integrate your app with RETN, your app must:
 
@@ -30,9 +31,11 @@ The API is organized around REST. All requests should be made over SSL. All requ
 
 You can use this method to generate RETN ERC20 Address. You will have to pass the email ID of the user to get the ERC20 Address
 
-+ email (string)                : Email ID to whom the ERC20 address has to be generated
+*Parameters to post*
 
-Note : This API Checks if the user already exists with the network and returns their details. If not, the user will be signedup in the network and their credentials will be mailed to them.
++ email (string)                : Email ID for whom the ERC20 address has to be generated
+
+Note : This API Checks if the user already exists with the network and returns their details. If not, the user will be signedup in the network and their credentials will be mailed to them and returns their newly created ERC20 address.
 
 + Request  (application/json)
 
@@ -75,12 +78,13 @@ Note : This API Checks if the user already exists with the network and returns t
             "message": "Invalid API key"
         }
         
-## Redeem As Merchant [/redeemAsMechant/]
+## Redeem From Merchant [/redeemFromMerchant/]
 
 ### POST [POST]
 
-As a merchant, you can use this end point to redeem RETN from your RETN ERC20 Address to your customer's RETN ERC20 Address
+Your consumer can redeem their awarded points into RETN from Merchant Account to Consumer Account.
 
+*Parameters to post*
 + address (string)                : RETN ERC address of the receipient
 + tokens (decimal)                : Number of tokens to be sent
 
