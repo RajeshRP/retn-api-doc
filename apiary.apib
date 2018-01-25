@@ -82,7 +82,9 @@ Note : This API Checks if the user already exists with the network and returns t
 
 ### POST [POST]
 
-This is meant for the platforms. You can use this method to generate RETN ERC20 Address of your merchants. You will have to pass the email ID of the user to get the ERC20 Address
+This is meant for loyalty platforms who intend to create additional points redemption options. You can use this method to generate RETN ERC20 Address of your merchants. You will have to pass the email ID of the user to get the ERC20 Address.
+
+When a merchant's customer intends to redeem their RETN, all you have to do is call the *redeemAsMerchant* endpoint with merchant's api key that you received from the response of this endpoint as *rest_key*.
 
 *Parameters to post*
 
