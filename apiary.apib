@@ -1,0 +1,129 @@
+FORMAT: 1A
+HOST: https://staging.retainly.co/app/eth
+
+# RETN
+
+Integrate your app with RETN cashback Network. The most popular crypto loyalty cashback system that everyone loves.
+This documentation is intended for the merchants that are already having cashback system but willing to use RETN network to use crypto cashback with RETN coin.
+The merchants must signup with RETN and get their API key to consume the below endpoints.
+
+##Requirements for apps using the RETN API
+
+Retainly API supports non-rich internet SaaS apps that users access with a web browser. Mobile extensions to these SaaS apps are also supported.
+
+If you plan to integrate your app with RETN, your app must:
+
+* Be a web app available for use within a browser.
+*  Pass the technical, security, and marketing reviews.
+
+
+
+The API is organized around REST. All requests should be made over SSL. All request and response bodies, including errors, are encoded in JSON.This collection of API provides various methods to pull data from RETN Network.
+
+*Note*
+
+    RETN-API-KEY must be passed in the request header for all API Calls.
+    
+## Generate RETN ERC20 Address [/generateErcAddressAsMerchant/]
+
+### POST [POST]
+
+You can use this method to generate RETN ERC20 Address. You will have to pass the email ID of the user to get the ERC20 Address
+
++ email (string)                : Email ID to whom the ERC20 address has to be generated
+
+Note : This API Checks if the user already exists with the network and returns their details. If not, the user will be signedup in the network and their credentials will be mailed to them.
+
++ Request  (application/json)
+
+    + Headers
+    
+            RETN-API-KEY: YOUR_API_KEY
+
+    + Body 
+
+            {
+                "email": "rajesh@retainlyhq.com"
+            }
+            
+
++ Response 200 (application/json)
+
+        {
+         "status": true,
+         "erc20addr": "0x96ec31220e85f05f48bb48ba81ea7dc924f14873"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "status": "false"
+            "message": "Email Missing"
+        }
+
++ Response 200 (application/json)
+
+        {
+             "status": "false",
+            "message": "Invalid Email Format"
+        }
+        
++ Response 403 (application/json)
+
+        {
+            "status": "false"
+            "message": "Invalid API key"
+        }
+        
+## Redeem As Merchant [/redeemAsMechant/]
+
+### POST [POST]
+
+As a merchant, you can use this end point to redeem RETN from your RETN ERC20 Address to your customer's RETN ERC20 Address
+
++ address (string)                : RETN ERC address of the receipient
++ tokens (decimal)                : Number of tokens to be sent
+
+Note : To call this function, its mandatory that merchant's ERC address must be generated with RETN network. The merchant should have some ETH balance in their account as it will be used for the gas. The merchant is also expected to have enough RETN tokens on their address prior calling this. Once all conditions are met and successful posting of the transaction, this would return the transaction hash from the network which can then be scanned with etherscan.io
+
++ Request  (application/json)
+
+    + Headers
+    
+            RETN-API-KEY: YOUR_API_KEY
+
+    + Body 
+
+            {
+                "address": "0xf66f2abc5a2f4c89784ed8c129f1b4e82e49d57d",
+                "tokens" : 2.5
+            }
+            
+
++ Response 200 (application/json)
+
+        {
+         "status": true,
+         "message": "0x15ca47b06ffaecf68b63516084987fecb82800114d1d57429ff427f33fd685e3"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "status": "false"
+            "message": "Address Missing"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status": "false",
+            "message": "Tokens Count is Missing"
+        }
+        
++ Response 403 (application/json)
+
+        {
+            "status": "false"
+            "message": "Invalid API key"
+        }
